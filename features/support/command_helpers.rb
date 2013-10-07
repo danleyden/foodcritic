@@ -269,7 +269,7 @@ module FoodCritic
     # @param &block the block of code to execute
     def suppress_output(&block)
       old_stdout = $stdout
-      $stdout = File.open(File::NULL, 'w')
+      $stdout = File.open(File.constants.include?(:NULL) ? File::NULL : "/dev/null", 'w')
       block.call
       $stdout = old_stdout
     end
